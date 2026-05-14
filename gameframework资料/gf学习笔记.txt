@@ -1,0 +1,137 @@
+subscirbe 订阅事件-事件触发时回调OnLoadConfigSuccess ，EventId事件id
+GF.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+Fire  触发事件-触发事件并调用create
+ GF.Event.Fire(this, PlayerDataChangedEventArgs.Create(tp, oldValue, value));                  
+
+
+
+using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
+//重命名=右边的内容
+
+GameEntry.RegisterComponent（）方法注册所有继承GameFrameworkComponent的类，作为框架的组件Component注册，也就是说搜索 : GameFrameworkComponent，就找到了所有的框架目前所持有的组件
+GameFrameworkComponent
+
+ProcedureLaunch-一些初始化加载工作，以及版本信息确认
+ProcedureSplash-资源加载动画，及确定资源加载的方式，本地（AB包），网络（热更新-是否需要更新版本，热更新-是否需要更新资源，非热更新（整包更新）-跳转到商店更新版本），无需加载等
+无需加载-ProcedurePreload
+
+本地（AB包）-ProcedureInitResource
+
+ProcedureInitResource-本地ab资源包加载，也可以写自己的资源加载方法和格式
+
+
+网络
+ProcedureCheckVersion-检查版本号 m_NeedUpdateVersion=1表示需要更新版本，1 -ProcedureUpdateVersion  0-ProcedureCheckResources
+
+ GameEntry.Event.Subscribe(WebRequestSuccessEventArgs.EventId, OnWebRequestSuccess);
+ GameEntry.Event.Subscribe(WebRequestFailureEventArgs.EventId, OnWebRequestFailure);
+ GameEntry.WebRequest.AddWebRequest(Utility.Text.Format(GameEntry.BuiltinData.BuildInfo.CheckVersionUrl, GetPlatformPath()), this);
+ WebRequestSuccessEventArgs ne = (WebRequestSuccessEventArgs)e;
+if (ne.UserData != this)//此方法判断协议号，网游可以改成具体协议id
+
+
+ 
+ 
+ 
+ 事件创建->对应的manager中注册m_ResourceManager.ResourceVerifySuccess += OnResourceVerifySuccess;，并通过其 On方法OnResourceVerifySuccess，fire事件的create触发
+ ，事件实际的逻辑在manager类中他的父类是Imanager接口类（部分项目以GameFramework.dll方式保存实现）
+ 
+ 
+ 
+ProcedureUpdateVersion-检查并下载版本资源 完成后m_UpdateVersionComplete=1切换至ProcedureCheckResources
+
+
+
+ProcedureCheckResources-确认是否有需要下载的资源以及大小等  m_NeedUpdateResources 有就进入ProcedureUpdateResources 没有就进入ProcedurePreload
+
+ProcedureUpdateResources-下载资源完成后进入ProcedurePreload
+
+ProcedurePreload-预加载 各种LoadConfig，配置文件，策划文件，LoadDictionary多语言文件 预加载GameEntry.Data.中所有DataBase数据,组件 ui ，音频，等等，完成后转到ProcedureLoadingScene并切换scene，procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, GameEntry.Config.GetInt("Scene.Menu"));
+//整个事件的逻辑链比较绕下面是完整的过程
+首先ProcedurePreload 调用
+  protected override void OnEnter(ProcedureOwner procedureOwner)
+  {
+      base.OnEnter(procedureOwner);
+
+      GameEntry.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+      GameEntry.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
+      GameEntry.Event.Subscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
+      GameEntry.Event.Subscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
+	  
+	  LoadConfigSuccessEventArgs，一般情况下被 manager中的实现以fire的形式调用create就行回调
+	  绕了很大一圈以下逻辑最终OnReadDataSuccess中调用了fire
+	  
+	  -------------------------------------
+
+
+
+ public interface IDataProvider<T>
+  event EventHandler<ReadDataSuccessEventArgs> ReadDataSuccess;
+ ->
+     internal sealed class DataProvider<T> : IDataProvider<T>
+	         private EventHandler<ReadDataSuccessEventArgs> m_ReadDataSuccessEventHandler;
+			         public event EventHandler<ReadDataSuccessEventArgs> ReadDataSuccess
+        {
+            add
+            {
+                m_ReadDataSuccessEventHandler += value;
+            }
+            remove
+            {
+                m_ReadDataSuccessEventHandler -= value;
+            }
+        }
+		
+		 public void ReadData(string dataAssetName, int priority, object userData)
+				{
+	                //....
+                 if (m_ReadDataSuccessEventHandler != null)
+                 {
+                     ReadDataSuccessEventArgs loadDataSuccessEventArgs = ReadDataSuccessEventArgs.Create(dataAssetName, 0f, userData);
+                     m_ReadDataSuccessEventHandler(this, loadDataSuccessEventArgs);
+                     ReferencePool.Release(loadDataSuccessEventArgs);
+                 }
+				    //....
+                }
+ ->
+  internal sealed partial class ConfigManager : GameFrameworkModule, IConfigManager
+		private readonly DataProvider<IConfigManager> m_DataProvider;
+        public void ReadData(string configAssetName)
+        {
+            m_DataProvider.ReadData(configAssetName);
+        }
+		
+		
+		
+		
+		
+->    
+		public sealed class ConfigComponent : GameFrameworkComponent
+
+
+		 m_ConfigManager.ReadDataSuccess += OnReadDataSuccess;  //IConfigManager m_ConfigManager     m_ConfigManager = GameFrameworkEntry.GetModule<IConfigManager>();//即获取当前的IConfigManager组件即
+		private void OnReadDataSuccess(object sender, ReadDataSuccessEventArgs e)
+        {
+            m_EventComponent.Fire(this, LoadConfigSuccessEventArgs.Create(e));
+        }		
+		
+		
+		
+		->        ProcedurePreload中进行触发    PreloadResources();
+		
+		->  private void PreloadResources()
+		  {
+			  // Preload configs
+			  LoadConfig("DefaultConfig");
+
+			  // Preload dictionaries
+			  LoadDictionary("Default");
+
+			  GameEntry.Data.PreLoadAllData();
+		  }
+		  
+		  -> private void LoadConfig(string configName)
+			 {
+				 string configAssetName = AssetUtility.GetConfigAsset(configName, false);
+				 m_LoadedFlag.Add(configAssetName, false);
+				 GameEntry.Config.ReadData(configAssetName, this);// public sealed class ConfigComponent : GameFrameworkComponent      public void ReadData(string configAssetName, object userData)
