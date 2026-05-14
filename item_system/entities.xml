@@ -1,0 +1,6 @@
+<root>
+	<!-- Item Entity: represents an item instance, stored in inventory/warehouse -->
+	<Item></Item>
+	<!-- ItemPool Entity: manages object pool for items, avoids frequent create/destroy -->
+	<ItemPool></ItemPool>
+</root>

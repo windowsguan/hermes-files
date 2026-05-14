@@ -1,0 +1,366 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#888" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4FC3F7" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#66BB6A" />
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FFB347" />
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#B388FF" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF7043" />
+    </marker>
+
+    <!-- Gradient definitions -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+
+    <linearGradient id="clientGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#4FC3F7"/>
+    </linearGradient>
+
+    <linearGradient id="mysqlGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00758F"/>
+      <stop offset="100%" stop-color="#40E0D0"/>
+    </linearGradient>
+
+    <linearGradient id="hooksGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="100%" stop-color="#81C784"/>
+    </linearGradient>
+
+    <linearGradient id="controllerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E64A19"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+
+    <linearGradient id="managerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#B388FF"/>
+    </linearGradient>
+
+    <linearGradient id="entityGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F57F17"/>
+      <stop offset="100%" stop-color="#FFB347"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Background -->
+  <rect width="1200" height="900" fill="url(#bgGrad)" />
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" fill="#E0E0E0" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold">
+    KBEngine Item System — Architecture
+  </text>
+
+  <!-- ========================================== -->
+  <!-- EXTERNAL DEPENDENCIES (Top Row)           -->
+  <!-- ========================================== -->
+
+  <!-- Client (Unity) -->
+  <rect x="40" y="65" width="160" height="65" rx="10" ry="10"
+        fill="url(#clientGrad)" stroke="#1565C0" stroke-width="2"/>
+  <text x="120" y="90" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold">
+    Client (Unity)
+  </text>
+  <text x="120" y="112" text-anchor="middle" fill="#CCE4FF" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Client Messages
+  </text>
+
+  <!-- Network Protocol -->
+  <rect x="230" y="65" width="170" height="65" rx="10" ry="10"
+        fill="url(#clientGrad)" stroke="#1565C0" stroke-width="2"/>
+  <text x="315" y="90" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold">
+    Network Protocol
+  </text>
+  <text x="315" y="112" text-anchor="middle" fill="#CCE4FF" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Protocol Buffers / Serialization
+  </text>
+
+  <!-- MySQL Database -->
+  <rect x="840" y="65" width="180" height="65" rx="10" ry="10"
+        fill="url(#mysqlGrad)" stroke="#00758F" stroke-width="2"/>
+  <text x="930" y="90" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold">
+    MySQL Database
+  </text>
+  <text x="930" y="112" text-anchor="middle" fill="#B2F0EA" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    item_templates / item_pools
+  </text>
+
+  <!-- ========================================== -->
+  <!-- LAYER LABELS                               -->
+  <!-- ========================================== -->
+
+  <!-- KBEngine Hooks Label -->
+  <text x="40" y="165" fill="#66BB6A" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic">
+    ◆ KBEngine Hooks Layer
+  </text>
+
+  <!-- Controller Label -->
+  <text x="40" y="260" fill="#FF7043" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic">
+    ◆ Controller Layer
+  </text>
+
+  <!-- Manager Label -->
+  <text x="40" y="400" fill="#B388FF" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic">
+    ◆ Manager Layer
+  </text>
+
+  <!-- Entity Label -->
+  <text x="40" y="740" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="bold" font-style="italic">
+    ◆ Entity Layer
+  </text>
+
+  <!-- ========================================== -->
+  <!-- KBENGINE HOOKS LAYER                       -->
+  <!-- ========================================== -->
+
+  <!-- ItemSystem_kbemain.py -->
+  <rect x="50" y="178" width="1100" height="70" rx="12" ry="12"
+        fill="url(#hooksGrad)" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="600" y="205" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold">
+    ItemSystem_kbemain.py — KBEngine Lifecycle Hooks
+  </text>
+  <text x="600" y="228" text-anchor="middle" fill="#E8F5E9" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    onInit · onPlayerLogin · onPlayerLogout · onUpdate · onShutdown
+  </text>
+
+  <!-- ========================================== -->
+  <!-- CONTROLLER LAYER                           -->
+  <!-- ========================================== -->
+
+  <!-- ItemController -->
+  <rect x="300" y="275" width="600" height="100" rx="12" ry="12"
+        fill="url(#controllerGrad)" stroke="#E64A19" stroke-width="2"/>
+  <text x="600" y="308" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="bold">
+    ItemController
+  </text>
+  <text x="600" y="330" text-anchor="middle" fill="#FFD4C4" font-family="Segoe UI, Arial, sans-serif" font-size="14">
+    Central Orchestrator — dispatches to managers
+  </text>
+  <text x="600" y="350" text-anchor="middle" fill="#FFD4C4" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+    Routes client messages → appropriate manager
+  </text>
+
+  <!-- ========================================== -->
+  <!-- MANAGER LAYER                              -->
+  <!-- ========================================== -->
+
+  <!-- ItemTemplate -->
+  <rect x="50" y="415" width="170" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="135" y="448" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemTemplate
+  </text>
+  <text x="135" y="470" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Cached Template Lookup
+  </text>
+
+  <!-- ItemPool -->
+  <rect x="250" y="415" width="170" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="335" y="448" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemPool
+  </text>
+  <text x="335" y="470" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Object Pool Manager
+  </text>
+
+  <!-- InventoryManager -->
+  <rect x="450" y="415" width="190" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="545" y="448" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    InventoryManager
+  </text>
+  <text x="545" y="470" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Inventory Operations
+  </text>
+
+  <!-- ItemDatabaseSync -->
+  <rect x="680" y="415" width="190" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="775" y="448" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemDatabaseSync
+  </text>
+  <text x="775" y="470" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Dirty Flag → Batch Write → MySQL
+  </text>
+
+  <!-- ItemCraftManager -->
+  <rect x="900" y="415" width="190" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="995" y="448" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemCraftManager
+  </text>
+  <text x="995" y="470" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Crafting Recipes &amp; Processing
+  </text>
+
+  <!-- ItemTradeManager -->
+  <rect x="50" y="515" width="190" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="145" y="548" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemTradeManager
+  </text>
+  <text x="145" y="570" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Trade &amp; Exchange
+  </text>
+
+  <!-- ItemMessageProtocol -->
+  <rect x="270" y="515" width="210" height="70" rx="10" ry="10"
+        fill="url(#managerGrad)" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="375" y="548" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold">
+    ItemMessageProtocol
+  </text>
+  <text x="375" y="570" text-anchor="middle" fill="#E0D4F5" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Message Serialization &amp; Routing
+  </text>
+
+  <!-- ========================================== -->
+  <!-- ENTITY LAYER                               -->
+  <!-- ========================================== -->
+
+  <!-- Item Entity -->
+  <rect x="310" y="755" width="220" height="80" rx="12" ry="12"
+        fill="url(#entityGrad)" stroke="#F57F17" stroke-width="2"/>
+  <text x="420" y="788" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="bold">
+    Item Entity
+  </text>
+  <text x="420" y="810" text-anchor="middle" fill="#FFF0D4" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+    KBEngine Proxy — Individual Item Instance
+  </text>
+
+  <!-- ItemPool Entity -->
+  <rect x="640" y="755" width="220" height="80" rx="12" ry="12"
+        fill="url(#entityGrad)" stroke="#F57F17" stroke-width="2"/>
+  <text x="750" y="788" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="bold">
+    ItemPool Entity
+  </text>
+  <text x="750" y="810" text-anchor="middle" fill="#FFF0D4" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+    KBEngine Proxy — Reusable Object Pool
+  </text>
+
+  <!-- ========================================== -->
+  <!-- FLOW ARROWS - Client → Controller          -->
+  <!-- ========================================== -->
+
+  <!-- Client → Network Protocol → Hooks → Controller -->
+  <!-- Client to Protocol -->
+  <path d="M200,115 L230,115"
+        stroke="#4FC3F7" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Protocol → Hooks -->
+  <path d="M400,115 L400,178"
+        stroke="#4FC3F7" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Hooks → Controller -->
+  <path d="M600,248 L600,275"
+        stroke="#66BB6A" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-green)"/>
+
+  <!-- Controller → Managers -->
+  <path d="M600,375 L600,415"
+        stroke="#FF7043" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-orange)"/>
+
+  <!-- Controller to InventoryManager -->
+  <path d="M545,375 L545,415"
+        stroke="#FF7043" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-orange)"/>
+
+  <!-- Controller to ItemDatabaseSync -->
+  <path d="M775,375 L775,415"
+        stroke="#FF7043" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-orange)"/>
+
+  <!-- Controller to ItemCraftManager -->
+  <path d="M995,375 L995,415"
+        stroke="#FF7043" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead-orange)"/>
+
+  <!-- ========================================== -->
+  <!-- ItemPool ↔ InventoryManager (bidirectional) -->
+  <!-- ========================================== -->
+  <path d="M335,485 L450,485"
+        stroke="#B388FF" stroke-width="2" fill="none"
+        marker-start="url(#arrowhead-purple)"
+        marker-end="url(#arrowhead-purple)"/>
+
+  <!-- ItemDatabaseSync → MySQL -->
+  <path d="M775,485 L775,555 L840,555 L840,115"
+        stroke="#40E0D0" stroke-width="2" fill="none"
+        marker-end="url(#arrowhead)"/>
+
+  <!-- ItemTemplate cached lookup annotation -->
+  <rect x="50" y="505" width="200" height="30" rx="5" ry="5"
+        fill="transparent" stroke="#B388FF" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="150" y="525" text-anchor="middle" fill="#B388FF" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-style="italic">
+    Cached Template Lookup
+  </text>
+
+  <!-- Dirty flag → Batch Write annotation -->
+  <path d="M775,485 L775,650"
+        stroke="#40E0D0" stroke-width="1.5" fill="none"
+        marker-end="url(#arrowhead)"/>
+  <text x="860" y="580" fill="#40E0D0" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-style="italic">
+    Dirty Flag → Batch Write → MySQL
+  </text>
+
+  <!-- InventoryManager ↔ ItemPool (bidirectional, bottom) -->
+  <path d="M545,520 L335,485"
+        stroke="#B388FF" stroke-width="1.5" fill="none"
+        marker-end="url(#arrowhead-purple)"/>
+
+  <!-- ========================================== -->
+  <!-- LAYER SEPARATOR LINES                      -->
+  <!-- ========================================== -->
+  <line x1="30" y1="160" x2="1170" y2="160"
+        stroke="#444" stroke-width="1" stroke-dasharray="8,4"/>
+  <line x1="30" y1="255" x2="1170" y2="255"
+        stroke="#444" stroke-width="1" stroke-dasharray="8,4"/>
+  <line x1="30" y1="395" x2="1170" y2="395"
+        stroke="#444" stroke-width="1" stroke-dasharray="8,4"/>
+  <line x1="30" y1="600" x2="1170" y2="600"
+        stroke="#444" stroke-width="1" stroke-dasharray="8,4"/>
+  <line x1="30" y1="730" x2="1170" y2="730"
+        stroke="#444" stroke-width="1" stroke-dasharray="8,4"/>
+
+  <!-- ========================================== -->
+  <!-- ANNOTATION BOXES                           -->
+  <!-- ========================================== -->
+
+  <!-- Object Pool annotation -->
+  <rect x="310" y="845" width="220" height="40" rx="6" ry="6"
+        fill="#1a1a2e" stroke="#FFB347" stroke-width="1"/>
+  <text x="420" y="870" text-anchor="middle" fill="#FFB347" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    Object Pool Pattern
+  </text>
+
+  <!-- Network annotation -->
+  <rect x="230" y="130" width="200" height="30" rx="5" ry="5"
+        fill="transparent" stroke="#4FC3F7" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="330" y="150" text-anchor="middle" fill="#4FC3F7" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-style="italic">
+    Message Flow
+  </text>
+
+  <!-- Bottom legend -->
+  <rect x="880" y="850" width="270" height="35" rx="6" ry="6"
+        fill="#1a1a2e" stroke="#66BB6A" stroke-width="1"/>
+  <text x="1015" y="873" text-anchor="middle" fill="#66BB6A" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+    scripts/item_system/ (12 files)
+  </text>
+</svg>

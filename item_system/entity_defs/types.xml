@@ -1,0 +1,25 @@
+<root>
+	<Item>
+		<property name="itemID" type="UINT" indexed="true" />
+		<property name="templateID" type="UINT" />
+		<property name="name" type="STRING" />
+		<property name="quantity" type="UINT" />
+		<property name="maxStack" type="UINT" />
+		<property name="durability" type="UINT" />
+		<property name="maxDurability" type="UINT" />
+		<property name="bound" type="BOOL" />
+		<property name="ownerID" type="UINT" indexed="true" />
+		<property name="ownerName" type="STRING" />
+		<property name="location" type="STRING" />
+		<property name="slotIndex" type="INT" />
+		<property name="attributes" type="STRING" />
+		<property name="createTime" type="UINT" />
+		<property name="expireTime" type="UINT" />
+		<property name="isDirty" type="BOOL" />
+	</Item>
+	<ItemPool>
+		<property name="capacity" type="UINT" />
+		<property name="available" type="UINT" />
+		<property name="recycleThreshold" type="UINT" />
+	</ItemPool>
+</root>
